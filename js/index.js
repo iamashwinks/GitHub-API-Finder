@@ -34,39 +34,43 @@ $(document).ready(function () {
                         </div>
                     </div>
                     <br>
-                `);
-
-                // Loading repos of the Entered User
-                $.ajax({
-                    url: 'https://api.github.com/users/' + username + '/repos',
-                    method: 'GET',
-                    type: 'application/json',
-                    data: {
-                        client_id: '75f4efc64ba9f0aea5dc',
-                        client_secret: '08237ea241a7c6ab32c683843496f05f2ffbcb34'
-                    },
-                    success: function(repos) {
-                        $("#repos").empty();
-                        for (repo of repos) {
-                            $("#repos").append(`
-                            <div class="card" style="margin-bottom: 20px;">
-                            <div class="card-body">
-                              <h5 class="card-title">
-                                Repository Name: ${repo.name}
-                                <span class="badge badge-success">Forks: ${repo.forks_count}</span>
-                                <span class="badge badge-danger">Watchers: ${repo.watchers_count}</span>
-                                <span class="badge badge-warning">Stars: ${repo.stargazers_count}</span>
-                              </h5>
-                              <p class="card-text">Description: ${repo.description}</p>
-                              <a href="${repo.html_url}" class="btn btn-primary" target="_blank">View Repo</a>
-                            </div>
-                          </div>
-                            `);
-                        }
-                    },
-                });
+                `); 
                 
+                fetchRepo(username);
             }
         });
     });
+
+    function fetchRepo(username) {
+        // Loading repos of the Entered User
+        $.ajax({
+            url: 'https://api.github.com/users/' + username + '/repos',
+            method: 'GET',
+            type: 'application/json',
+            data: {
+                client_id: '75f4efc64ba9f0aea5dc',
+                client_secret: '08237ea241a7c6ab32c683843496f05f2ffbcb34'
+            },
+            success: function(repos) {
+                $("#repos").empty();
+                for (repo of repos) {
+                    $("#repos").append(`
+                    <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-body">
+                    <h5 class="card-title">
+                        Repository Name: ${repo.name}
+                        <span class="badge badge-success">Forks: ${repo.forks_count}</span>
+                        <span class="badge badge-danger">Watchers: ${repo.watchers_count}</span>
+                        <span class="badge badge-warning">Stars: ${repo.stargazers_count}</span>
+                    </h5>
+                    <p class="card-text">Description: ${repo.description}</p>
+                    <a href="${repo.html_url}" class="btn btn-primary" target="_blank">View Repo</a>
+                    </div>
+                </div>
+                    `);
+                }
+            },
+        });
+    }
+    
 });
