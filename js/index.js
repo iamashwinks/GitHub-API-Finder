@@ -9,8 +9,8 @@ $(document).ready(function () {
             method: "GET",
             type: "application/json",
             data: {
-                client_id: '75f4efc64ba9f0aea5dc',
-                client_secret: '08237ea241a7c6ab32c683843496f05f2ffbcb34'
+                client_id: '<your_client_id>',
+                client_secret: '<your_client_secret>'
             },
             success: function (user) {
 
@@ -48,8 +48,8 @@ $(document).ready(function () {
             method: 'GET',
             type: 'application/json',
             data: {
-                client_id: '75f4efc64ba9f0aea5dc',
-                client_secret: '08237ea241a7c6ab32c683843496f05f2ffbcb34'
+                client_id: '<your_client_id>',
+                client_secret: '<your_client_secret>'
             },
             success: function(repos) {
                 $("#repos").empty();
